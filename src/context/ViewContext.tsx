@@ -9,7 +9,7 @@ interface ViewContextType {
 
 const ViewContext = createContext<ViewContextType | undefined>(undefined);
 
-export const ViewProvider = ({ children }: { children: ReactNode }) => {
+export const ViewProvider = ({ children }: { children?: ReactNode }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('narrative');
 
   const toggleViewMode = () => {
