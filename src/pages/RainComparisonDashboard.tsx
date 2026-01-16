@@ -142,8 +142,8 @@ const BarRaceChart = ({ metricPrefix, scope, isCurrency, currencyMode }: any) =>
   };
 
   return (
-    <div className="h-full flex flex-col">
-        <div className="flex-1 min-h-[350px]">
+    <div className="flex flex-col">
+        <div className="h-[450px] w-full">
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                     data={currentData}
@@ -194,7 +194,7 @@ const BarRaceChart = ({ metricPrefix, scope, isCurrency, currencyMode }: any) =>
         </div>
 
         {/* Controls */}
-        <div className="mt-6 flex items-center gap-4 bg-slate-900/50 p-3 rounded-lg border border-slate-800 backdrop-blur-sm">
+        <div className="mt-6 flex items-center gap-4 bg-slate-900/50 p-3 rounded-lg border border-slate-800 backdrop-blur-sm h-16 shrink-0">
             <button
                 onClick={() => setIsPlaying(!isPlaying)}
                 className="p-2 rounded-full bg-indigo-600 text-white hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-900/20"
@@ -240,7 +240,9 @@ const ComparisonSection = ({ title, icon: Icon, metricPrefix, isCurrency = false
   const { viewMode } = useViewMode();
   const isAnalyst = viewMode === 'analyst';
 
+  // Transform data for Recharts: [{ Year: 0, Fire: 100, Wind: 200 }, ...]
   const chartData = useMemo(() => {
+    // Assume all nations have same number of years, use Fire as base
     return SIMULATION_DATA['Fire'].map((_, index) => {
       const row: any = { Year: index };
       COMPARISON_NATIONS.forEach(nation => {
