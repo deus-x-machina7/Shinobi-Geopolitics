@@ -125,7 +125,7 @@ const BarRaceChart = ({ metricPrefix, scope, isCurrency, currencyMode }: any) =>
       name: nation,
       value: SIMULATION_DATA[nation][year][`${scope}_${metricPrefix}` as keyof typeof SIMULATION_DATA[typeof nation][0]],
       color: NATION_METADATA[nation].color
-    }));
+    })).sort((a, b) => (b.value as number) - (a.value as number));
   }, [year, scope, metricPrefix]);
 
   const handleReset = () => {
@@ -134,8 +134,8 @@ const BarRaceChart = ({ metricPrefix, scope, isCurrency, currencyMode }: any) =>
   };
 
   return (
-    <div className="h-full flex flex-col">
-        <div className="flex-1 min-h-[350px]">
+    <div className="flex flex-col">
+        <div className="h-[450px] w-full">
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                     data={currentData}
@@ -180,7 +180,7 @@ const BarRaceChart = ({ metricPrefix, scope, isCurrency, currencyMode }: any) =>
         </div>
 
         {/* Controls */}
-        <div className="mt-6 flex items-center gap-4 bg-slate-900/50 p-3 rounded-lg border border-slate-800 backdrop-blur-sm">
+        <div className="mt-6 flex items-center gap-4 bg-slate-900/50 p-3 rounded-lg border border-slate-800 backdrop-blur-sm h-16 shrink-0">
             <button
                 onClick={() => setIsPlaying(!isPlaying)}
                 className="p-2 rounded-full bg-indigo-600 text-white hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-900/20"
@@ -351,7 +351,7 @@ const WarEraComparison = () => {
       // @ts-ignore
       value: SIMULATION_DATA[nation][year][`${scope}_GDP`],
       color: NATION_METADATA[nation].color
-    }));
+    })).sort((a, b) => b.value - a.value);
   };
 
   return (
